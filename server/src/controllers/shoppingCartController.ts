@@ -1,6 +1,6 @@
 import { Router, Request, Response } from "express";
 import { getErrorMassage } from '../utils/errorUtils.js';
-import { shoppingCartServiceGet } from "../services/ShoppingCartService.ts";
+import { shoppingCartServiceGet } from "../services/shoppingCartService.js";
 import { Types } from 'mongoose'
 // trqbva da import Request, Response za6toto ts ne znae req, res kakuv type sa
 
