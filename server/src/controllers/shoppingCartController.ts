@@ -1,6 +1,6 @@
 import { Router, Request, Response } from "express";
 import { getErrorMassage } from '../utils/errorUtils.js';
-import { shoppingCartService } from "../services/ShoppingCartService.ts";
+import { shoppingCartServiceGet } from "../services/ShoppingCartService.ts";
 import { Types } from 'mongoose'
 // trqbva da import Request, Response za6toto ts ne znae req, res kakuv type sa
 
@@ -23,7 +23,7 @@ shoppingCartController.get('/', async (req: AuthRequest, res: Response) => {
     }
 
     try {
-        const items = await shoppingCartService(userId)
+        const items = await shoppingCartServiceGet(userId)
         res.json(items)
     } catch (error) {
         res.status(400).json({ error: getErrorMassage(error) })
