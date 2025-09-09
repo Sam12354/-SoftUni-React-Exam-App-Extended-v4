@@ -16,3 +16,18 @@
 .cart-btn:hover {
     background-color: #218838; 
 }
+
+.cart-icon {
+    position: fixed; 
+    top: 20px;
+    right: 20px;
+    font-size: 2rem; 
+    cursor: pointer;
+    z-index: 1000; 
+    transition: transform 0.2s;
+}
+  
+  .cart-icon:hover {
+    transform: scale(1.2);
+}
+  

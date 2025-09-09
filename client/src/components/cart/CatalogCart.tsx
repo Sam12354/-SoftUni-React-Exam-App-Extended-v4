@@ -10,7 +10,6 @@ export interface CartProps {
 
 export default function Cart() {
 
-    // Cast the JS hook return to a tuple so TypeScript knows the types
     const [items] = useGetAllCartItems();
 
     return (
