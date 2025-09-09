@@ -8,10 +8,13 @@ import Reviews from "../reviews/Reviews";
 import Comments from "../comments/Coments";
 import { likeItem } from "../../api/like-api.js";
 import LikeButton from "../like-button/LikeButton";
+import { createCart } from "../../api/api-cart";
+import CartButton from "../cartButton/cartButton";
 
 export default function Details() {
 
-    const [isBought, setIsBought] = useState(false);
+    // const [isBought, setIsBought] = useState(false);
+    const [addToCart, setIsAddToCart] = useState(false);
     const [isLiked, setIsLiked] = useState(false);
 
     const { itemId } = useParams()
@@ -22,11 +25,21 @@ export default function Details() {
     const item = data?.item || {};
     const isOwner = data?.isOwner || false;
 
-    const itemBuyHandler = async () => {
-        try {
-            await like(itemId)
+    // const itemBuyHandler = async () => {
+    //     try {
+    //         await like(itemId)
 
-            setIsBought(true)
+    //         setIsBought(true)
+    //     } catch (err) {
+    //         console.log(err.message)
+    //     }
+    // }
+
+    const itemAddToCart = async () => {
+        try {
+            await createCart(itemId)
+
+            setIsAddToCart(true)
         } catch (err) {
             console.log(err.message)
         }
@@ -95,14 +108,16 @@ export default function Details() {
                                                     <LikeButton onLike={itemLikeHandler} />
                                                     )}
 
-                                                    {isBought ? (
+                                                    {addToCart ? (
                                                         <div className="alert alert-success text-uppercase mt-3" style={{ fontWeight: 'bold', fontSize: '1.5rem', padding: '0.5rem 1.5rem', borderRadius: '0.25rem', textAlign: 'center' }}>
                                                             Item(s) have been successfully added to your cart.
                                                         </div>
                                                     ) : (
-                                                        <button onClick={itemBuyHandler} className="btn btn-success btn-xl text-uppercase mt-3" type="button">
-                                                            <i className="fas fa-shopping-cart me-1"></i> Buy
-                                                        </button>
+                                                        // <button onClick={itemBuyHandler} className="btn btn-success btn-xl text-uppercase mt-3" type="button">
+                                                        //     <i className="fas fa-shopping-cart me-1"></i> Buy
+                                                        // </button>
+                                                        <CartButton onClick={itemAddToCart} className="btn btn-success btn-xl text-uppercase mt-3" type="button" />
+                                                            
                                                     )
                                                     }
                                                 </>

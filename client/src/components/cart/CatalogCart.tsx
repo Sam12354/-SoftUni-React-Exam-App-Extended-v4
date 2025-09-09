@@ -1,5 +1,5 @@
 import { useGetAllCartItems } from "../../hooks/useCart";
-import CatalogCart from "./catalogCart/CatalogCart";
+import CatalogCart from "./catalogCart/CatalogCartItem";
 
 export interface CartProps {
     _id: string;

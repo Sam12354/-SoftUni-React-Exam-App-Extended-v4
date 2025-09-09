@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { CartProps } from "../components/cart/Cart";
+import { CartProps } from "../components/cart/CatalogCart";
 import { getAllCartItems } from "../api/api-cart";
 
 export function useGetAllCartItems() {
