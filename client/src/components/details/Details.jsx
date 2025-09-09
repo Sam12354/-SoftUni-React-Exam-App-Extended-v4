@@ -113,10 +113,10 @@ export default function Details() {
                                                             Item(s) have been successfully added to your cart.
                                                         </div>
                                                     ) : (
+                                                        <CartButton onClick={itemAddToCart} className="btn btn-success btn-xl text-uppercase mt-3" type="button" />
                                                         // <button onClick={itemBuyHandler} className="btn btn-success btn-xl text-uppercase mt-3" type="button">
                                                         //     <i className="fas fa-shopping-cart me-1"></i> Buy
                                                         // </button>
-                                                        <CartButton onClick={itemAddToCart} className="btn btn-success btn-xl text-uppercase mt-3" type="button" />
                                                             
                                                     )
                                                     }

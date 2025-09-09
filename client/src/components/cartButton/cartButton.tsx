@@ -1,14 +1,16 @@
+import '../../../public/styles/cart.css';
+
 interface CartButtonProps {
     onCart: () => void; // callback function with no arguments
 }
 
 export default function CartButton({ onCart }: CartButtonProps) {
     return (
-        <button 
-            onClick={onCart} 
-            className="btn btn-outline-primary d-flex align-items-center gap-2"
+        <button
+            onClick={onCart}
+            className="cart-btn"
         >
-            🛒 Added on cart
+            <i className="fas fa-shopping-cart me-1"></i> Buy
         </button>
     );
 }
