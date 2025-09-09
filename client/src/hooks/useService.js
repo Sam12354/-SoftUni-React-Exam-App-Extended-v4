@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { create, getAll, getOne, remove } from "../api/api.js";
 import { useNavigate } from "react-router-dom";
 import { getAllVideos } from "../api/video-api.js";
+import { getAllCartItems } from "../api/api-cart.js";
 
 export function useGetAllItems() {
 
