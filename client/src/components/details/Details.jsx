@@ -105,21 +105,11 @@ export default function Details() {
                                                         Item Liked 👍
                                                     </div>
                                                     ) : (
-                                                    <LikeButton onLike={itemLikeHandler} />
+                                                        <LikeButton onLike={itemLikeHandler} />
                                                     )}
 
-                                                    {addToCart ? (
-                                                        <div className="alert alert-success text-uppercase mt-3" style={{ fontWeight: 'bold', fontSize: '1.5rem', padding: '0.5rem 1.5rem', borderRadius: '0.25rem', textAlign: 'center' }}>
-                                                            Item(s) have been successfully added to your cart.
-                                                        </div>
-                                                    ) : (
-                                                        <CartButton onClick={itemAddToCart} className="btn btn-success btn-xl text-uppercase mt-3" type="button" />
-                                                        // <button onClick={itemBuyHandler} className="btn btn-success btn-xl text-uppercase mt-3" type="button">
-                                                        //     <i className="fas fa-shopping-cart me-1"></i> Buy
-                                                        // </button>
-                                                            
-                                                    )
-                                                    }
+                                                    <CartButton onClick={itemAddToCart} className="btn btn-success btn-xl text-uppercase mt-3" type="button" />                                   
+                                                  
                                                 </>
                                             )}
                                         </div>

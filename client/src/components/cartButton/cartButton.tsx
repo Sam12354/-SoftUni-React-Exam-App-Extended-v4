@@ -1,7 +1,7 @@
 import '../../../public/styles/cart.css';
 
 interface CartButtonProps {
-    onCart: () => void; // callback function with no arguments
+    onCart: () => void; 
 }
 
 export default function CartButton({ onCart }: CartButtonProps) {
