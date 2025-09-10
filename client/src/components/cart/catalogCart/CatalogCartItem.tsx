@@ -7,7 +7,7 @@ export interface CatalogCartProps {
     image: string;
 }
 
-export default function CatalogCart({ _id, title, price, image }: CatalogCartProps){
+export default function CatalogCartItem({ _id, title, price, image }: CatalogCartProps){
     return (
         <div className="portfolio-item">
             <Link className="portfolio-link" to={`/${_id}`}>

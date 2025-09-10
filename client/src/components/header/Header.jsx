@@ -28,6 +28,7 @@ export default function Header() {
                                 <Link className="nav-item nav-link" to="/videos">Video Catalog</Link>
                                 <Link className="nav-item nav-link" to="/create-videos">Video Upload</Link>
                                 <Link className="nav-item nav-link" to="/logout">Logout</Link>
+                                <Link className="nav-item nav-link" to="/cart">🛒</Link>
                                 </>
                             ) : (
                                 <>

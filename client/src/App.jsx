@@ -18,6 +18,7 @@ import LiveChat from './components/LiveChat/LiveChat';
 import ChatGuard from './components/common/ChatGuard'
 import Videos from "./components/videos/Videos"
 import CreateVideo from "./components/create-video/CreateVideo"
+import CatalogCart from "./components/cart/CatalogCart"
 
 
 function App() {
@@ -39,6 +40,7 @@ function App() {
                     <Route path="/:itemId" element={<Details />} />
                     <Route path="/videos" element={<RouteGuard><Videos /></RouteGuard>} />
                     <Route path="/create-videos" element={<RouteGuard><CreateVideo /></RouteGuard>} />
+                    <Route path="/cart" element={<RouteGuard><CatalogCart /></RouteGuard>} />
                     <Route path="*" element={<NotFound />} />
                 </Routes>
                 <ChatGuard>
