@@ -8,13 +8,14 @@ import Reviews from "../reviews/Reviews";
 import Comments from "../comments/Coments";
 import { likeItem } from "../../api/like-api.js";
 import LikeButton from "../like-button/LikeButton";
-import { createCart } from "../../api/api-cart";
+import { createCart, getAllCartItems } from "../../api/api-cart";
 import CartButton from "../cartButton/cartButton";
 
 export default function Details() {
 
     // const [isBought, setIsBought] = useState(false);
-    const [addToCart, setIsAddToCart] = useState(false);
+
+    const [cartItems, setAllCartItems] = useState([])
     const [isLiked, setIsLiked] = useState(false);
 
     const { itemId } = useParams()
@@ -34,12 +35,16 @@ export default function Details() {
     //         console.log(err.message)
     //     }
     // }
+    
+    const fetchAllCartItems = async () => {
+        const result = await getAllCartItems()
+        return setAllCartItems(result)
+    }
 
     const itemAddToCart = async () => {
         try {
-            await createCart(itemId)
-
-            setIsAddToCart(true)
+            await createCart(itemId, userId)
+            await fetchAllCartItems()
         } catch (err) {
             console.log(err.message)
         }
@@ -108,7 +113,7 @@ export default function Details() {
                                                         <LikeButton onLike={itemLikeHandler} />
                                                     )}
 
-                                                    <CartButton onClick={itemAddToCart} className="btn btn-success btn-xl text-uppercase mt-3" type="button" />                                   
+                                                    <CartButton onClick={itemAddToCart} className="btn btn-success btn-xl text-uppercase mt-3" type="button" />
                                                   
                                                 </>
                                             )}

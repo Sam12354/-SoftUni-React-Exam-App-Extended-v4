@@ -11,6 +11,7 @@ export interface CartProps {
 export default function CatalogCart() {
 
     const [items] = useGetAllCartItems();
+    
 
     return (
         <section className="page-section bg-light" id="portfolio">

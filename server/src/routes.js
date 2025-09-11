@@ -8,14 +8,14 @@ import commentController from './controllers/commentController.js';
 import { changePasswordController } from './controllers/changePasswordController.js'
 import videoController from './controllers/videoController.js'
 import likeController from './controllers/likeController.js'
-// import shoppingCartController from './controllers/shoppingCartController.js'
+import shopCartController from './controllers/shopCartController.js';
 
 
 const routes = Router()
 
 routes.use(homeController)
 routes.use('/video', videoController)
-// routes.use('/cart', shoppingCartController)
+routes.use('/cart', shopCartController)
 routes.use('/like', likeController)
 routes.use('/auth', authController)
 routes.use('/item', itemController)

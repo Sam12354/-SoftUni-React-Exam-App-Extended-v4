@@ -56,6 +56,15 @@ export const isAuth = (req, res, next) => {
 
 }
 
+// export const apiAuth = (req, res, next) => {
+//     if (!req.user) {
+//         return res.status(401).json({ error: 'User not authenticated' });
+//     }
+//     next();
+// };
+
+// // test
+
 export const isGuest = (req, res, next) => {
 
     if(!req.isAuthenticated){
