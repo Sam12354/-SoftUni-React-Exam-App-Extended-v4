@@ -11,6 +11,8 @@ export interface CartProps {
 export default function CatalogCart() {
 
     const [items] = useGetAllCartItems();
+    console.log(items);
+    
     
 
     return (

@@ -8,8 +8,8 @@ import Reviews from "../reviews/Reviews";
 import Comments from "../comments/Coments";
 import { likeItem } from "../../api/like-api.js";
 import LikeButton from "../like-button/LikeButton";
-import { createCart, getAllCartItems } from "../../api/api-cart";
 import CartButton from "../cartButton/cartButton";
+import { useGetAllCartItems } from "../../hooks/useCart";
 
 export default function Details() {
 
@@ -35,16 +35,11 @@ export default function Details() {
     //         console.log(err.message)
     //     }
     // }
-    
-    const fetchAllCartItems = async () => {
-        const result = await getAllCartItems()
-        return setAllCartItems(result)
-    }
 
     const itemAddToCart = async () => {
         try {
-            await createCart(itemId, userId)
-            await fetchAllCartItems()
+            await useCreateCartItem(itemId)
+            // await fetchAllCartItems()
         } catch (err) {
             console.log(err.message)
         }
@@ -113,7 +108,7 @@ export default function Details() {
                                                         <LikeButton onLike={itemLikeHandler} />
                                                     )}
 
-                                                    <CartButton onClick={itemAddToCart} className="btn btn-success btn-xl text-uppercase mt-3" type="button" />
+                                                    <CartButton onCart={itemAddToCart} />
                                                   
                                                 </>
                                             )}

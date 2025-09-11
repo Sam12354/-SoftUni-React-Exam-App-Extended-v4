@@ -12,7 +12,7 @@ shoppingCartController.get('/', async (req, res) => {
     }
 
     try {
-        const items = await shoppingCartServiceGet(userId);
+        const items = (await shoppingCartServiceGet(userId)) || [];
         res.json(items);
     } catch (error) {
         res.status(400).json({ error: getErrorMassage(error) });
@@ -21,14 +21,14 @@ shoppingCartController.get('/', async (req, res) => {
 
 shoppingCartController.post('/', async (req, res) => {
     const userId = req.user?._id;
-    const itemId = req.params.itemId;
+    const itemId = req.body.itemId;
 
     if(!userId){
         return res.status(401).json({ error: 'User not authenticated' });
     }
 
     try {
-        const items = await shoppingCartService(userId, itemId);
+        const items = (await shoppingCartService(userId, itemId)) || [];
         res.json(items);
     } catch (error) {
         res.status(400).json({ error: getErrorMassage(error) });
