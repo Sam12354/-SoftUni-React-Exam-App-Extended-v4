@@ -3,6 +3,7 @@ import { getComments, createComment } from "../../api/comment-api";
 import { AuthContext } from "../../contexts/AuthContext";
 
 export default function Comments({ itemId }) {
+    
     const { isAuthenticated } = useContext(AuthContext);
     const [comments, setComments] = useState([]);
     const [content, setContent] = useState("");
