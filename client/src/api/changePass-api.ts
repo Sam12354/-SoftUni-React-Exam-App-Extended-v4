@@ -7,5 +7,6 @@ export interface Password {
 }
 
 export async function changePassword(oldPassword: string, newPassword: string) {
-    return requester.put(`${BASE_URL}/changePassword`, { oldPassword, newPassword });
+    const payload: Password = { oldPassword, newPassword };
+    return requester.put(`${BASE_URL}/changePassword`, payload);
 }

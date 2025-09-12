@@ -8,12 +8,8 @@ import Reviews from "../reviews/Reviews";
 import Comments from "../comments/Coments";
 import { likeItem } from "../../api/like-api.js";
 import LikeButton from "../like-button/LikeButton";
-import CartButton from "../cartButton/cartButton";
-import { useCreateCartItem, useGetAllCartItems } from "../../hooks/useCart";
 
 export default function Details() {
-
-    // const [isBought, setIsBought] = useState(false);
 
     const [isLiked, setIsLiked] = useState(false);
 
@@ -21,8 +17,6 @@ export default function Details() {
     const [data] = useGetOneItem(itemId);
 
     const { isAuthenticated } = useContext(AuthContext)
-
-    const createCartItem = useCreateCartItem();
 
     const item = data?.item || {};
     const isOwner = data?.isOwner || false;
@@ -36,15 +30,6 @@ export default function Details() {
     //         console.log(err.message)
     //     }
     // }
-
-    const itemAddToCart = async () => {
-        try {
-            await createCartItem(itemId)
-            
-        } catch (err) {
-            console.log(err.message)
-        }
-    }
 
     const navigate = useNavigate()
 
@@ -108,8 +93,6 @@ export default function Details() {
                                                     ) : (
                                                         <LikeButton onLike={itemLikeHandler} />
                                                     )}
-
-                                                    <CartButton onCart={itemAddToCart} />
                                                   
                                                 </>
                                             )}

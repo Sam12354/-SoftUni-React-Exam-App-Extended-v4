@@ -26,7 +26,9 @@ export default function ChangePassword() {
 
         setLoading(true);
         try {
-            await changePassword(oldPass, newPass);
+            const payload: PassProps = { oldPassword: oldPass, newPassword: newPass };
+            await changePassword(payload.oldPassword, payload.newPassword);
+            // tova za da moje da izpolzvam PassProps otgore for type safety and code quality
             setSuccess("Password changed successfully");
             setOldPass("");
             setNewPass("");
