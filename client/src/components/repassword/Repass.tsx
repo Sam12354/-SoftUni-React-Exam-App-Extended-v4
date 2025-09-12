@@ -1,15 +1,20 @@
 import { useState } from "react";
 import { changePassword } from "../../api/changePass-api";
 
+export interface PassProps {
+    oldPassword: string;
+    newPassword: string;
+}
+
 export default function ChangePassword() {
     const [oldPass, setOldPass] = useState("");
     const [newPass, setNewPass] = useState("");
     const [repeatPass, setRepeatPass] = useState("");
-    const [error, setError] = useState(null);
-    const [success, setSuccess] = useState(null);
-    const [loading, setLoading] = useState(false);
+    const [error, setError] = useState<string | null>(null);
+    const [success, setSuccess] = useState<string | null>(null);
+    const [loading, setLoading] = useState<boolean>(false);
 
-    const onSubmit = async (e) => {
+    const onSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
         setError(null);
         setSuccess(null);
@@ -27,7 +32,9 @@ export default function ChangePassword() {
             setNewPass("");
             setRepeatPass("");
         } catch (err) {
-            setError(err.message || "Failed to change password");
+            if (err instanceof Error) {
+                setError(err.message);
+            }
         } finally {
             setLoading(false);
         }

@@ -9,19 +9,20 @@ import Comments from "../comments/Coments";
 import { likeItem } from "../../api/like-api.js";
 import LikeButton from "../like-button/LikeButton";
 import CartButton from "../cartButton/cartButton";
-import { useGetAllCartItems } from "../../hooks/useCart";
+import { useCreateCartItem, useGetAllCartItems } from "../../hooks/useCart";
 
 export default function Details() {
 
     // const [isBought, setIsBought] = useState(false);
 
-    const [cartItems, setAllCartItems] = useState([])
     const [isLiked, setIsLiked] = useState(false);
 
     const { itemId } = useParams()
     const [data] = useGetOneItem(itemId);
 
     const { isAuthenticated } = useContext(AuthContext)
+
+    const createCartItem = useCreateCartItem();
 
     const item = data?.item || {};
     const isOwner = data?.isOwner || false;
@@ -38,8 +39,8 @@ export default function Details() {
 
     const itemAddToCart = async () => {
         try {
-            await useCreateCartItem(itemId)
-            // await fetchAllCartItems()
+            await createCartItem(itemId)
+            
         } catch (err) {
             console.log(err.message)
         }

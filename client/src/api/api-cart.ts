@@ -18,7 +18,7 @@ export const getAllCartItems = async (): Promise<Cart[]> => {
     // thats an array of cart objects
 }
 
-export const createCart = async (itemId: string): Promise<void> => {
+export const createCart = async (itemId: string) => {
     const response = await requester.post(`${BASE_URL}/cart`, { itemId });
     
     return response.data;
