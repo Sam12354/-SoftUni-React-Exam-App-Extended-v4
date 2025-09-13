@@ -3,19 +3,33 @@ import { getReviews, createReview, getAverageRating } from "../../api/review-api
 import { useParams } from "react-router-dom";
 import { AuthContext } from "../../contexts/AuthContext";
 
-export default function Reviews({ isOwner }) {
-    const { itemId } = useParams();
-    const { isAuthenticated } = useContext(AuthContext);
+interface PassProps {
+    isOwner: string;
+}
 
-    const [reviews, setReviews] = useState([]);
-    const [stars, setStars] = useState(5);
+interface Review {
+    itemId: string;
+    stars: number;
+}
+
+export default function Reviews({ isOwner }: PassProps) {
+    const { isAuthenticated } = useContext(AuthContext);
+    const { itemId } = useParams<{ itemId: string }>();
+
+    const [reviews, setReviews] = useState<Review[]>([]);
+    const [stars, setStars] = useState<number>(5);
     const [average, setAverage] = useState({ average: 0, count: 0 });
-    const [loading, setLoading] = useState(true);
-    const [error, setError] = useState(null);
+    const [loading, setLoading] = useState<boolean>(true);
+    const [error, setError] = useState<string | null>(null);
 
     const fetchReviews = async () => {
         try {
             setLoading(true);
+
+            // TypeScript thinks itemId could be undefined because the URL param might not exist,
+            // so we check it here and exit early if it's missing.
+
+            if (!itemId) return;
             const revs = await getReviews(itemId);
             setReviews(revs);
 
@@ -24,7 +38,9 @@ export default function Reviews({ isOwner }) {
 
             setLoading(false);
         } catch (err) {
-            setError(err.message || "Failed to load reviews");
+            if(err instanceof Error){
+                setError(err.message || "Failed to load reviews");
+            }
             setLoading(false);
         }
     };
@@ -33,15 +49,19 @@ export default function Reviews({ isOwner }) {
         fetchReviews();
     }, [itemId]);
 
-    const onSubmit = async (e) => {
+    // im telling TS that (e) is a React form event coming from an HTML <form> element
+    const onSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
 
         try {
+            if (!itemId) return;
             await createReview(itemId, stars);
             setStars(5);
             fetchReviews();
         } catch (err) {
-            setError(err.message || "You have already reviewed this item");
+            if(err instanceof Error){
+                setError(err.message || "You have already reviewed this item");
+            }
         }
     };
 
