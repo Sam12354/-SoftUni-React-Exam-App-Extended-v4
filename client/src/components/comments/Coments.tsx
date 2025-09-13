@@ -2,14 +2,26 @@ import { useEffect, useState, useContext } from "react";
 import { getComments, createComment } from "../../api/comment-api";
 import { AuthContext } from "../../contexts/AuthContext";
 
-export default function Comments({ itemId }) {
-    
+export interface PassProps {
+    itemId: string;
+}
+
+interface Comment {
+    _id: string;
+    text: string;
+    userId: {
+        email: string;
+    };
+}
+
+export default function Comments({ itemId }: PassProps) {
+
     const { isAuthenticated } = useContext(AuthContext);
-    const [comments, setComments] = useState([]);
-    const [content, setContent] = useState("");
-    const [error, setError] = useState(null);
-    const [loading, setLoading] = useState(true);
-    const [visibleCount, setVisibleCount] = useState(10);
+    const [comments, setComments] = useState<Comment[]>([]);
+    const [content, setContent] = useState<string>("");
+    const [error, setError] = useState<string | null>(null);
+    const [loading, setLoading] = useState<boolean>(true);
+    const [visibleCount, setVisibleCount] = useState<number>(10);
 
     // Accepts a parameter to decide whether to show loading spinner
     const fetchComments = async (showLoading = true) => {
@@ -19,7 +31,9 @@ export default function Comments({ itemId }) {
             setComments(data);
             if (showLoading) setLoading(false);
         } catch (err) {
-            setError(err.message || "Failed to load comments");
+            if (err instanceof Error) {
+                setError(err.message);
+            }
             if (showLoading) setLoading(false);
         }
     };
@@ -28,7 +42,7 @@ export default function Comments({ itemId }) {
         fetchComments(); // initial fetch with loading spinner
     }, [itemId]);
 
-    const onSubmit = async (e) => {
+    const onSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
         if (!content.trim()) return;
 
@@ -37,7 +51,10 @@ export default function Comments({ itemId }) {
             setContent("");
             await fetchComments(false); // fetch without loading spinner to prevent flicker
         } catch (err) {
-            setError(err.message || "Failed to create comment");
+            if (err instanceof Error) {
+                setError(err.message);
+            }
+            // err instanceof Error safely narrows it to an actual Error, not unknown
         }
     };
 
