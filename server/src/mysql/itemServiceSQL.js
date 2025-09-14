@@ -1,4 +1,4 @@
-import { pool } from './db.js';
+import { pool } from './db/db.js';
 
 // Create item in MySQL
 export async function createItem({ title, brand, price, image, description }) {
