@@ -94,7 +94,7 @@ Core Features
 
 ✨ New Features
 
--  Video Feature
+-    Video Feature
   
 -  Upload videos directly from PC
   
