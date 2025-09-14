@@ -8,10 +8,12 @@ import Reviews from "../reviews/Reviews";
 import Comments from "../comments/Coments";
 import { likeItem } from "../../api/like-api.js";
 import LikeButton from "../like-button/LikeButton";
+import Modal from "../modal/Modal";
 
 export default function Details() {
 
     const [isLiked, setIsLiked] = useState(false);
+    const [showModal, setShowModal] = useState(false)
 
     const { itemId } = useParams()
     const [data] = useGetOneItem(itemId);
@@ -79,21 +81,22 @@ export default function Details() {
                                                             <i className="fas fa-edit me-1"></i> Edit
                                                         </button>
                                                     </Link>
-                                                    <button onClick={itemDeleteHandler} className="btn btn-danger btn-xl text-uppercase mt-3" type="button">
-                                                        <i className="fas fa-trash me-1"></i> Delete
+                                                    {showModal && <Modal onConfirm={() => itemDeleteHandler(itemId)} onCancel={() => setShowModal(false)} />}
+                                                    <button onClick={() => setShowModal(true)} className="btn btn-danger btn-xl text-uppercase mt-3" type="button">
+                                                        Delete Video
                                                     </button>
                                                 </>
                                             ) : (
                                                 <>
 
                                                     {isLiked ? (
-                                                    <div className="text-success fw-bold">
-                                                        Item Liked 👍
-                                                    </div>
+                                                        <div className="text-success fw-bold">
+                                                            Item Liked 👍
+                                                        </div>
                                                     ) : (
                                                         <LikeButton onLike={itemLikeHandler} />
                                                     )}
-                                                  
+
                                                 </>
                                             )}
                                         </div>
