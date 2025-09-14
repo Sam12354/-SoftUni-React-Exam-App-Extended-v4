@@ -1,6 +1,7 @@
 import { Router } from "express";
 import { getErrorMassage } from "../utils/errorUtils.js";
-import { likeItem } from '../mysql/mysqlServices/likeServiceSQL.js';
+import { likeItem } from "../services/likeService.js";
+import Like from "../models/Likes.js";
 
 const likeController = Router();
 
@@ -10,10 +11,10 @@ likeController.post('/:itemId', async (req, res) => {
     const itemId = req.params.itemId 
     
     try {
-        // const existingLike = await Like.findOne({ user: userId, item: itemId });
-        // if (existingLike) {
-        //     return res.status(200).json(existingLike); 
-        // }
+        const existingLike = await Like.findOne({ user: userId, item: itemId });
+        if (existingLike) {
+            return res.status(200).json(existingLike); 
+        }
         const like = await likeItem(userId, itemId)
         res.json(like);
     } catch (error) {
